@@ -100,45 +100,43 @@ erDiagram
   recipients ||--o{ campaign_recipients : "in"
 
   users {
-    uuid id PK
-    citext email UK
+    uuid id
+    citext email
     text name
     text password_hash
     timestamptz created_at
   }
 
   campaigns {
-    uuid id PK
+    uuid id
     text name
     text subject
     text body
-    enum campaign_status status
+    text status
     timestamptz scheduled_at
-    uuid created_by FK
+    uuid created_by
     timestamptz created_at
     timestamptz updated_at
-    uuid updated_by FK
+    uuid updated_by
     timestamptz deleted_at
   }
 
   recipients {
-    uuid id PK
-    citext email UK
+    uuid id
+    citext email
     text name
     timestamptz deleted_at
     timestamptz created_at
   }
 
   campaign_recipients {
-    uuid campaign_id PK_FK
-    uuid recipient_id PK_FK
+    uuid campaign_id
+    uuid recipient_id
     timestamptz sent_at
     timestamptz opened_at
-    enum campaign_recipient_status status
+    text status
   }
 ```
-
-PostgreSQL: types **`campaign_status`**, **`campaign_recipient_status`** (`CREATE TYPE … AS ENUM`). Diagram uses `enum` labels for readability.
 
 ## How I Used Claude Code
 
