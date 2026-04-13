@@ -9,20 +9,6 @@ Interview submission: **Yarn workspaces** monorepo. From **`CampaignManager/`** 
 
 **Prerequisites:** Node **≥ 20**, **Yarn 1.x**, **Docker** (optional, for Compose). See each package’s `package.json` for scripts.
 
----
-
-## Verify before you submit
-
-From **`CampaignManager/`**:
-
-```bash
-yarn install
-yarn test      # API Vitest
-yarn lint      # Typecheck API + FE
-yarn build     # Production builds both workspaces
-```
-
-All three should pass with no errors.
 
 ---
 
