@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: campaign_manager
+    ports:
+      - '5432:5432'
+    volumes:
+      - campaign_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d campaign_manager']
+      interval: 3s
+      timeout: 5s
+      retries: 15
+
+  api:
+    build:
+      context: ./CampaignManagerAPI
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/campaign_manager
+      JWT_SECRET: docker-dev-secret-must-be-at-least-32-characters-long
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: http://localhost:5173
+      PORT: 8000
+      NODE_ENV: development
+      MAX_RECIPIENTS_PER_CAMPAIGN: 10000
+      COOKIE_NAME: access_token
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  campaign_pgdata:

@@ -1,0 +1,22 @@
+{
+  "name": "mini-campaign-manager",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "CampaignManagerAPI",
+    "CampainManagerFE"
+  ],
+  "scripts": {
+    "dev:api": "yarn workspace campaign-manager-api dev",
+    "dev:fe": "yarn workspace campain-manager-fe dev",
+    "build": "yarn workspace campaign-manager-api build && yarn workspace campain-manager-fe build",
+    "lint": "yarn workspace campaign-manager-api lint && yarn workspace campain-manager-fe lint",
+    "test": "yarn workspace campaign-manager-api test",
+    "migrate": "yarn workspace campaign-manager-api migrate",
+    "seed:demo": "yarn workspace campaign-manager-api seed:demo",
+    "docker:up": "docker compose up --build"
+  }
+}
